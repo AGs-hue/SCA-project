@@ -1,0 +1,6 @@
+export enum PackageStates {
+  PICKED_UP = 'PICKED_UP',
+  IN_TRANSIT = 'IN_TRANSIT',
+  WAREHOUSE = 'WAREHOUSE',
+  DELIVERED = 'DELIVERED',
+}

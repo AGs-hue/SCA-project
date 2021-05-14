@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { PackagesModule } from './modules/packages/packages.module';
 import { SharedModule } from './shared.module';
 
 import { ConfigModule } from 'src/config/config.module';
@@ -21,6 +22,7 @@ import { TypeOrmOptionsService } from 'src/typeorm/typeorm-options.service';
     HealthModule,
     UsersModule,
     SharedModule,
+    PackagesModule,
   ],
 })
 export class AppModule {}
