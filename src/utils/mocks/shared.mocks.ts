@@ -7,6 +7,7 @@ import { ShortCodeService } from 'src/services/short-code/short-code-generator.s
 
 const shortCodeServiceMockValue = {
   generate: () => jest.fn(),
+  generateUid: () => jest.fn(),
 };
 
 export const ShortCodeServiceMock = {

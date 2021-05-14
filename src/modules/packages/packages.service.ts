@@ -14,6 +14,8 @@ import { Package } from './package.entity';
 
 import { PackageStates } from 'src/enums/package-states.enum';
 import { ShortCodeService } from 'src/services/short-code/short-code-generator.service';
+import { PACKAGE_TRANSITION_STATES } from 'src/utils/constants/states.constants';
+import { StatusTransitionException } from 'src/utils/exceptions/StatusTransitionException.exception';
 
 @Injectable()
 export class PackagesService {
@@ -49,11 +51,38 @@ export class PackagesService {
     });
   }
 
-  async update(id: string, updatePackageDto: UpdatePackageDto) {
-    return `This action updates a #${id} package`;
+  async update(
+    id: string,
+    updatePackageDto: UpdatePackageDto,
+  ): Promise<Package> {
+    const pkg = await this.packageRepo.findOne(id);
+
+    if (
+      updatePackageDto.status &&
+      pkg.status !== updatePackageDto.status &&
+      !this.validateTransition(pkg, updatePackageDto.status)
+    ) {
+      // Cannot transition
+      throw new StatusTransitionException(
+        `Cannot update status from ${pkg.status} to ${updatePackageDto.status} `,
+      );
+    }
+
+    const updatedPkg = await this.packageRepo.save({
+      ...pkg,
+      ...updatePackageDto,
+    });
+
+    return updatedPkg;
   }
 
   remove(id: string) {
     return `This action removes a #${id} package`;
+  }
+
+  validateTransition(pkg: Package, newStatus: PackageStates): boolean {
+    const possibleStates = PACKAGE_TRANSITION_STATES[pkg.status];
+
+    return possibleStates.includes(newStatus);
   }
 }

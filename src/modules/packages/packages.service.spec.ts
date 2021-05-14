@@ -47,7 +47,7 @@ describe('PackagesService', () => {
       dimensions: '4m x 5m',
     };
 
-    const generateUid = jest
+    jest
       .spyOn(shortCodeService, 'generateUid')
       .mockReturnValue(SampleCreatedPackage.reference);
     const save = jest.spyOn(packagesRepo, 'save').mockReturnValue(
@@ -59,5 +59,47 @@ describe('PackagesService', () => {
     // the svae method call should be made with the right arguments
     expect(save.mock.calls[0][0]).toEqual(expect.objectContaining(input));
     expect(testResult).toBe(SampleCreatedPackage);
+  });
+
+  describe('Update a package', () => {
+    it('should transition from PICKED_UP to IN_TRANSIT', async () => {
+      const input: UpdatePackageDto = {
+        dimensions: '40m x 50m',
+        status: PackageStates.IN_TRANSIT,
+      };
+      const updatedPkg = plainToClass(Package, {
+        ...SampleCreatedPackage,
+        ...input,
+      });
+
+      jest
+        .spyOn(shortCodeService, 'generateUid')
+        .mockReturnValue(SampleCreatedPackage.reference);
+      jest.spyOn(packagesRepo, 'findOne').mockReturnValue(
+        new Promise<Package>((resolve) => resolve(SampleCreatedPackage)),
+      );
+      jest.spyOn(packagesRepo, 'save').mockReturnValue(
+        new Promise<Package>((resolve) => resolve(updatedPkg)),
+      );
+
+      const testResult = await service.update(SampleCreatedPackage.id, input);
+
+      expect(testResult).toBe(updatedPkg);
+    });
+
+    it('should not transition from DELIVERED to IN_TRANSIT', async () => {
+      const input: UpdatePackageDto = {
+        dimensions: '4m x 5m',
+        status: PackageStates.IN_TRANSIT,
+      };
+
+      jest.spyOn(packagesRepo, 'findOne').mockReturnValue(
+        new Promise<Package>((resolve) => resolve(SampleDeliveredPackage)),
+      );
+
+      await expect(async () => {
+        await service.update(SampleDeliveredPackage.id, input);
+      }).rejects.toThrow(StatusTransitionException);
+    });
   });
 });
