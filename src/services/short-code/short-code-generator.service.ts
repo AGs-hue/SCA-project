@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable class-methods-use-this */
 import { Injectable } from '@nestjs/common';
+import { v4 as uuidv4 } from 'uuid';
 
 import { ConfigService } from 'src/config/config.service';
 
@@ -13,6 +14,10 @@ export class ShortCodeService {
 
   async generate(encoder: string): Promise<string> {
     return this.hashId(Number.parseInt(encoder, 20));
+  }
+
+  generateUid(): string {
+    return uuidv4();
   }
 
   private hashId(encoder: number): string {
