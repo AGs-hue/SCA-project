@@ -17,7 +17,7 @@ export class Package {
   @Index({ unique: true })
   @Column('varchar', {
     length: 255,
-    comment: 'The unique transaction reference',
+    comment: 'The unique package reference',
   })
   reference: string;
 
