@@ -1,9 +1,7 @@
 version:2.1
-orbs:
-  docker: circleci/docker@1.7.0
-  node: circleci/node@4.7.0
 jobs:
   build:
+  working_directory: ~/repo
     docker:
       - image: node:14-alpine3.13
       - image: circleci/postgres:14-alpine-ram
@@ -13,11 +11,17 @@ jobs:
       POSTGRES_DB: hermes_db
     - image: postgres:12
 
-working_directory: /usr/src/app
+
 
 steps:
 - checkout
 
+# Download cache dependencies
+- restore_cache:
+  keys:
+  - v1-depencies-{{ checksum "package.json" }}
+ # Use latest cacheif no exact match is found
+  - v1-dependencies 
 
 
 - run: npm install
