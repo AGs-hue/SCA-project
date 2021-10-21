@@ -1,0 +1,30 @@
+version:2.1
+orbs:
+  docker: circleci/docker@1.7.0
+  node: circleci/node@4.7.0
+jobs:
+  build:
+    docker:
+      - image: node:14-alpine3.13
+      - image: circleci/postgres:14-alpine-ram
+      environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: hermes_db
+    - image: postgres:12
+
+working_directory: /usr/src/app
+
+steps:
+- checkout
+
+
+
+- run: npm install
+
+# run tests!
+- run: npm run test
+
+- setup_remote_docker:
+docker_layer_caching: true
+
