@@ -1,44 +1,61 @@
-version:2.1
-# orbs:
-#   node: circleci/node@4.7.0
-#   docker: circleci/docker@1.7.0
+version: '2.1'
+orbs:
+  node: circleci/node@4.7.0
 jobs:
-  build-and-test:
-    executor:
-      name: node/default
+  install-node-example:
+    docker:
+      - image: 'cimg/base:stable'
     steps:
       - checkout
-      - node/install-packages
-      - run:
-          command: npm run test
-  build:
-    working_directory: ~/repo
-    docker:
-      - image: node:14-alpine3.13
-      - image: circleci/postgres:14-alpine-ram
-      environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: hermes_db
-    - image: postgres:12
+      - node/install:
+          install-yarn: true
+      - run: node --version
+workflows:
+  test_my_app:
+    jobs:
+      - install-node-example
+
+# version:2.1
+# orbs:
+#   node: circleci/node@4.7.0
+
+# jobs:
+#   build-and-test:
+#     executor:
+#       name: node/default
+#     steps:
+#       - checkout
+#       - node/install-packages
+#       - run:
+#           command: npm run test
+#   build:
+#     working_directory: ~/repo
+#     docker:
+#       - image: node:14-alpine3.13
+#       - image: circleci/postgres:14-alpine-ram
+#       environment:
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: password
+#       POSTGRES_DB: hermes_db
+#     - image: postgres:12
 
 
 
-steps:
-- checkout
+# steps:
+# - checkout
 
-# Download cache dependencies
-- restore_cache:
-  keys:
-  - v1-depencies-{{ checksum "package.json" }}
- # Use latest cacheif 
+# # Download cache dependencies
+# - restore_cache:
+#   keys:
+#   - v1-depencies-{{ checksum "package.json" }}
+#  # Use latest cacheif 
 
 
-- run: npm install
+# - run: npm install
 
-# run tests!
-- run: npm run test
+# # run tests!
+# - run: npm run test
 
-- setup_remote_docker:
-docker_layer_caching: true
+# - setup_remote_docker:
+# docker_layer_caching: true
 
