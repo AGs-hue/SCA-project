@@ -1,7 +1,19 @@
 version:2.1
+orbs:
+  node: circleci/node@4.7.0
+  orbs:
+  docker: circleci/docker@1.7.0
 jobs:
+  build-and-test:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+          command: npm run test
   build:
-  working_directory: ~/repo
+    working_directory: ~/repo
     docker:
       - image: node:14-alpine3.13
       - image: circleci/postgres:14-alpine-ram
@@ -20,8 +32,7 @@ steps:
 - restore_cache:
   keys:
   - v1-depencies-{{ checksum "package.json" }}
- # Use latest cacheif no exact match is found
-  - v1-dependencies- 
+ # Use latest cacheif 
 
 
 - run: npm install
