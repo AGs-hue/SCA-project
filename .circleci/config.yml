@@ -13,5 +13,5 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - build
       - test
+      - run
