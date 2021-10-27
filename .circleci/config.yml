@@ -2,15 +2,19 @@ version: 2.1
 orbs:
   node: circleci/node@3.0.0
 jobs:
-  build_and_test:
+  build-and-test:
     executor:
       name: node/default
     steps:
       - checkout
-      - node/install-pakages
-      -run:
-        command: npm run test
-workflows: 
-  build_and_test:
+      - node/install-packages
+      - run:
+          command: npm run test
+workflows:
+  build-and-test:
     jobs:
-      -build-and-test
+      - build-and-test
+© 2021 GitHub, Inc.
+Terms
+Privacy
+
