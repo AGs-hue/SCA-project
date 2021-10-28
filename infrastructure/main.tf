@@ -1,6 +1,6 @@
 # SPECIFY THE PROVIDER (GCP)
 provider "google" {
-  credentials = "${file("sca-project-instance.json")}" 
+  credentials = "${file("sca-project-330409-b89ab5abe6f1json")}"
   project     = "sca-project"
   region      = "us-central1"
 }
@@ -28,7 +28,7 @@ resource "google_compute_instance" "myinstance" {
     }
   }
 
-  
+
   #  APPLY FIREWALL RULES TO ALLOW EXTERNAL IPs TO ACCESS THIS INSTANCE
   tags = ["http-server"]
 }
@@ -36,19 +36,19 @@ resource "google_compute_instance" "myinstance" {
 resource "google_compute_firewall" "http-server" {
   metadata_startup_script = "echo /www/html/index.html"
 
-  name = "default-allow-http-terraform"
+  name    = "default-allow-http-terraform"
   network = "default"
 
   allow {
     protocol = "tcp"
-    ports = ["80"]
+    ports    = ["80"]
   }
 
   # ALLOW TRAFFIC TO WITH HTTP-SERVER TAG TO INSTANCES
   source_ranges = ["0.0.0.0/0"]
-  target_tags = ["http-server"]
+  target_tags   = ["http-server"]
 }
 
 output "ip" {
-  value = "${google_compute_instance.default.network_interface.0.access_config.0.nat.ip}"
+  value = google_compute_instance.default.network_interface.0.access_config.0.nat.ip
 }
