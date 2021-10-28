@@ -1,6 +1,6 @@
 # SPECIFY THE PROVIDER (GCP)
 provider "google" {
-  credentials = "${file("sca-project-330409-b89ab5abe6f1.json.json")}"
+  credentials = "${file("sca-project-330409-b89ab5abe6f1.json")}"
   project     = "sca-project"
   region      = "us-central1"
 }
@@ -27,6 +27,7 @@ resource "google_compute_instance" "myinstance" {
       # GIVE VM EXTERNAL IP ADDRESS
     }
   }
+}
 
 
 #   #  APPLY FIREWALL RULES TO ALLOW EXTERNAL IPs TO ACCESS THIS INSTANCE
