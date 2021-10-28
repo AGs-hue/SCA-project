@@ -1,6 +1,5 @@
 # SPECIFY THE PROVIDER (GCP)
 provider "google" {
-  version     = "3.5.0"
   credentials = file("/Downloads/sca-project-instance.json") 
   project     = "sca-project"
   region      = "us-central1"
