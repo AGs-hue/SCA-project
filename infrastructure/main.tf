@@ -1,9 +1,8 @@
 # SPECIFY THE PROVIDER (GCP)
 provider "google" {
-  credentials = file("/Downloads/sca-project-instance.json") 
+  credentials = "${file("sca-project-instance.json")}" 
   project     = "sca-project"
   region      = "us-central1"
-  zone        = "us-central-a"
 }
 
 # resource "google_compute_network" "vpc_network" {
