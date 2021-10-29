@@ -2,8 +2,8 @@
 ## Deploy Virtual machine on Google Cloud Platform (GCP) and setup content via terraform.
 
 ### Requirements:
-- Terraform
-- Google Account
+- <Terraform>
+- <GCP Account>
 
 # CI/CD Pipelines with Circleci
 
