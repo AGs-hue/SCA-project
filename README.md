@@ -31,6 +31,7 @@ workflows:
     jobs:
       - build-and-test
 ```
+# Documentation: <https://circleci.com/docs/2.0/configuration-reference/>
 
 # Provisioning infrastructure on Google Cloud Platform (GCP) with Terraform
 
@@ -94,6 +95,7 @@ terraform validate
 ```shell
 terraform apply
 ```
+# Documentation: <https://learn.hashicorp.com/tutorials/terraform/google-cloud-platform-build?in=terraform/gcp-get-started>
 
 # Hermes API
 
