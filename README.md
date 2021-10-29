@@ -36,8 +36,6 @@ terraform fmt # updates configuration for readability and consistency
 terraform validate
 ```
 
-## Create infrastructure
-
 ```shell
 # Applies configuration defined in terraform files approving changes
 terraform apply
@@ -77,7 +75,7 @@ workflows:
       - build-and-test
 ```
 
-# Provisioning infrastructure on Google Cloud Platform (GCP) with Terraform
+- Provisioning infrastructure on Google Cloud Platform (GCP) with Terraform
 
 ```shell
 # This block specifies providers terrafoem will use to provision infrastructure and their latest version
