@@ -5,6 +5,36 @@
 - Terraform
 - Google Account
 
+# usage
+
+1. Clone project locally
+
+```shell
+https://github.com/AGs-hue/SCA-project.git
+```
+2. Install terraform
+
+- <https://learn.hashicorp.com/tutorials/terraform/install-cli>
+
+## Initialize directory
+
+```shell
+# Set up environment/dowmload providers specified in the confiduration
+Terraform init
+```
+```shell
+# Format and validate configuration
+terraform fmt # updates configuration for readability and consistency
+
+terraform validate
+```
+
+## Create infrastructure
+
+```shell
+terraform apply
+```
+
 # CI/CD Pipelines with Circleci
 
 ```shell
@@ -38,7 +68,6 @@ workflows:
     jobs:
       - build-and-test
 ```
-# Documentation: <https://circleci.com/docs/2.0/configuration-reference/>
 
 # Provisioning infrastructure on Google Cloud Platform (GCP) with Terraform
 
@@ -83,38 +112,12 @@ resource "google_compute_instance" "vm_instance" {
   }
 }
 ```
-# usage
-
-1. Clone project locally
-
-```shell
-https://github.com/AGs-hue/SCA-project.git
-```
-2. Install terraform
-
-- <https://learn.hashicorp.com/tutorials/terraform/install-cli>
 
 
 
-## Initialize directory
+- Documentation: <https://circleci.com/docs/2.0/configuration-reference/>
 
-```shell
-# Set up environment/dowmload providers specified in the confiduration
-Terraform init
-```
-```shell
-# Format and validate configuration
-terraform fmt # updates configuration for readability and consistency
-
-terraform validate
-```
-
-## Create infrastructure
-
-```shell
-terraform apply
-```
-# Documentation: <https://learn.hashicorp.com/tutorials/terraform/google-cloud-platform-build?in=terraform/gcp-get-started>
+- Documentation: <https://learn.hashicorp.com/tutorials/terraform/google-cloud-platform-build?in=terraform/gcp-get-started>
 
 # Hermes API
 
