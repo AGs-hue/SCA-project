@@ -32,6 +32,69 @@ workflows:
       - build-and-test
 ```
 
+# Provisioning infrastructure on Google Cloud Platform (GCP) with Terraform
+
+```shell
+# This block specifies providers terrafoem will use to provision infrastructure and their latest version
+terraform {
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "3.5.0"
+    }
+  }
+}
+
+# Configuration needed by Terraform to provision our resources on GCP 
+# Specify provider (GCP, AWS, Azure)
+provider "google" {
+  credentials = file("/home/ags/Documents/sca-project-330409-b89ab5abe6f1.json") # GCP service account key
+
+  project = "sca-project-330409"
+  region  = "us-central1"
+  zone    = "us-central1-c"
+}
+
+# Resource block defines information about our virtual machine, scripts to execute and tags to identify this resources
+resource "google_compute_network" "vpc_network" {
+  name = "terraform-network"
+}
+resource "google_compute_instance" "vm_instance" {
+  name         = "terraform-instance"
+  machine_type = "f1-micro"
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-9" # Operating system that will be connected to VPC network
+    }
+  }
+  network_interface {
+    network = google_compute_network.vpc_network.name
+    access_config {
+      # Include this section to give the VM an external ip address
+    }
+  }
+}
+```
+
+## Initialize directory
+
+```shell
+# Set up environment/dowmload providers specified in the confiduration
+Terraform init
+```
+```shell
+# Format and validate configuration
+terraform fmt # updates configuration for readability and consistency
+
+terraform validate
+```
+
+## Create infrastructure
+
+```shell
+terraform apply
+```
+
 # Hermes API
 
 ## Technologies
