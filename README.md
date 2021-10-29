@@ -83,6 +83,18 @@ resource "google_compute_instance" "vm_instance" {
   }
 }
 ```
+# usage
+
+1. Clone project locally
+
+```shell
+https://github.com/AGs-hue/SCA-project.git
+```
+2. Install terraform
+
+- <https://learn.hashicorp.com/tutorials/terraform/install-cli>
+
+
 
 ## Initialize directory
 
