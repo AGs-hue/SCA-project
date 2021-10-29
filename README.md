@@ -1,3 +1,37 @@
+# CI/CD Pipelines with Circleci
+
+```shell
+# You must choose a version of circle ci you want to use, all config files requires this
+version: 2.1
+
+# You can use already packaged circle ci workflows, they are called orbs
+orbs:
+  node: circleci/node@3.0.0 # We use the orbs for creating a node js workflow
+
+# This is where we define our actual process, each process is classified into a job. we can run multiple jobs
+jobs:
+  build-and-test:
+    executor:
+      name: node/default
+
+# next we define the steps involved in creating the workflow
+    steps:
+    # Install our dependencies with npm, we can use circleci to cache dependencies them for future use
+      - checkout
+       # We specify commands to run, each command has a name and the actual terminal command like below
+      - node/install-packages
+      - run:
+          command: npm run test
+
+workflows:
+# Below is the definition of your workflow.
+  # Inside the workflow, you provide the jobs you want to run, e.g this workflow runs the build-and-test job above.
+  # CircleCI will run this workflow on every commit.
+  build-and-test:
+    jobs:
+      - build-and-test
+```
+
 # Hermes API
 
 ## Technologies
