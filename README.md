@@ -5,7 +5,7 @@
 - Terraform
 - Google Account
 
-# usage
+# Usage
 
 1. Clone project locally
 
@@ -16,11 +16,18 @@ https://github.com/AGs-hue/SCA-project.git
 
 - <https://learn.hashicorp.com/tutorials/terraform/install-cli>
 
+## Running and setting up
+After installing terraform and configuring google cloud account, run application using terraform
+
 ## Initialize directory
 
 ```shell
 # Set up environment/dowmload providers specified in the confiduration
 Terraform init
+```
+```shell
+# Shows configuration to be applied
+terraform plan
 ```
 ```shell
 # Format and validate configuration
@@ -32,10 +39,11 @@ terraform validate
 ## Create infrastructure
 
 ```shell
+# Applies configuration defined in terraform files approving changes
 terraform apply
 ```
 
-# CI/CD Pipelines with Circleci
+# Code structure
 
 ```shell
 # You must choose a version of circle ci you want to use, all config files requires this
