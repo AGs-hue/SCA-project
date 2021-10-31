@@ -24,7 +24,7 @@ After installing terraform and configuring google cloud account, run application
 ## Initialize directory
 
 ```shell
-# Set up environment/dowmload providers specified in the confiduration
+# Set up environment/download providers specified in the configurations
 Terraform init
 ```
 ```shell
