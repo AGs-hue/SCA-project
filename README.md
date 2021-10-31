@@ -4,6 +4,7 @@
 ### Requirements:
 - Terraform
 - Google Account
+- Circleci Account
 
 # Usage
 
