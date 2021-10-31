@@ -5,6 +5,7 @@
 - Terraform
 - Google Account
 - Circleci Account
+- Heroku Account
 
 # Usage
 
@@ -50,7 +51,8 @@ version: 2.1
 
 # You can use already packaged circle ci workflows, they are called orbs
 orbs:
-  node: circleci/node@3.0.0 # We use the orbs for creating a node js workflow
+  node: circleci/node@3.0.0 # We use the node orbs to automatically create a nodejs workflow for us
+  heroku: circleci/heroku@0.0.10 # the heroku orbs to give us access to heroku jobs and commands
 
 # This is where we define our actual process, each process is classified into a job. we can run multiple jobs
 jobs:
@@ -74,6 +76,10 @@ workflows:
   build-and-test:
     jobs:
       - build-and-test
+  # here is one of heroku jobs that will deploy our application from out github repository. It will also handle installation of Heroku CLI, install project dependencies, run the script and deploy our application
+  heroku_deploy:
+    jobs:
+      - heroku/deploy-via-git     
 ```
 
 - Provisioning infrastructure on Google Cloud Platform (GCP) with Terraform
