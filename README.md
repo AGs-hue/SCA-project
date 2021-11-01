@@ -79,8 +79,11 @@ workflows:
   # here is one of heroku jobs that will deploy our application from out github repository. It will also handle installation of Heroku CLI, install project dependencies, run the script and deploy our application
   heroku_deploy:
     jobs:
-      - heroku/deploy-via-git     
+      - heroku/deploy-via-git  
 ```
+[![Pipelines-AGs-hue-SCA-project.png](https://i.postimg.cc/XqRZQDM8/Pipelines-AGs-hue-SCA-project.png)](https://postimg.cc/9wBFfbQR)
+
+[![scaproject-Her.png](https://i.postimg.cc/k5KTcLkj/scaproject-Her.png)](https://postimg.cc/DWfQfpfs)
 
 - Provisioning infrastructure on Google Cloud Platform (GCP) with Terraform
 
@@ -125,6 +128,7 @@ resource "google_compute_instance" "vm_instance" {
   }
 }
 ```
+[![VM-instances.png](https://i.postimg.cc/6pwLdzrK/VM-instances.png)](https://postimg.cc/2VcZYQ99)
 
 
 
